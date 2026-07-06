@@ -35,7 +35,11 @@ const services: ServiceCard[] = [
   }
 ];
 
-export default function ServicesSection() {
+interface ServicesSectionProps {
+  onServiceClick?: (title: string, description: string) => void;
+}
+
+export default function ServicesSection({ onServiceClick }: ServicesSectionProps) {
   return (
     <section
       id="services-section"
@@ -70,7 +74,8 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="glass-card rounded-2xl overflow-hidden flex flex-col group h-full w-full border border-white/5 transition-colors duration-500"
+              onClick={() => onServiceClick?.(service.title, service.description)}
+              className="glass-card cursor-pointer rounded-2xl overflow-hidden flex flex-col group h-full w-full border border-white/5 transition-colors duration-500"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               whileHover="hover"

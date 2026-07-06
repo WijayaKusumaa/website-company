@@ -92,13 +92,14 @@ export default function FeaturedVideoSection() {
               </div>
 
               {/* Right: Explore more button */}
-              <motion.button 
-                className="btn-amber shrink-0 shadow-[0_0_20px_rgba(232,119,46,0.3)] hover:shadow-[0_0_30px_rgba(232,119,46,0.5)]"
+              <motion.a 
+                href="#philosophy-section"
+                className="btn-amber shrink-0 shadow-[0_0_20px_rgba(232,119,46,0.3)] hover:shadow-[0_0_30px_rgba(232,119,46,0.5)] flex items-center justify-center text-center"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Explore more
-              </motion.button>
+              </motion.a>
             </div>
           </div>
         </motion.div>

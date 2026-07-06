@@ -33,17 +33,17 @@ const InstagramIcon = ({ size = 16 }: { size?: number }) => (
 
 export default function Footer() {
   const exploreLinks = [
-    { label: 'Features', href: '#features' },
-    { label: 'Location', href: '#location' },
-    { label: 'Schedule', href: '#schedule' },
-    { label: 'Availability', href: '#availability' }
+    { label: 'About', href: '#about-section' },
+    { label: 'Story', href: '#philosophy-section' },
+    { label: 'Services', href: '#services-section' },
+    { label: 'Discover', href: '#featured-video-section' }
   ];
 
   const servicesLinks = [
     { label: 'Research & Insight', href: '#services-section' },
     { label: 'Design & Execution', href: '#services-section' },
     { label: 'Technology & Scale', href: '#services-section' },
-    { label: 'Creative Development', href: '#services-section' }
+    { label: 'Creative Development', href: '#philosophy-section' }
   ];
 
   return (
@@ -96,10 +96,10 @@ export default function Footer() {
             {/* Social Media Buttons (Filled Circle reference style) */}
             <div className="flex items-center gap-2.5 mt-2">
               {[
-                { Icon: GithubIcon, href: 'https://github.com/wijayadev', label: 'GitHub' },
+                { Icon: GithubIcon, href: 'https://github.com/WijayaKusumaa', label: 'GitHub' },
                 { Icon: LinkedinIcon, href: 'https://linkedin.com/in/wijayadev', label: 'LinkedIn' },
                 { Icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
-                { Icon: InstagramIcon, href: 'https://instagram.com', label: 'Instagram' }
+                { Icon: InstagramIcon, href: 'https://www.instagram.com/haswaltch_/', label: 'Instagram' }
               ].map(({ Icon, href, label }) => (
                 <motion.a
                   key={label}

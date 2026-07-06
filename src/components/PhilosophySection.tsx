@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 
-export default function PhilosophySection() {
+interface PhilosophySectionProps {
+  onBlockClick?: (title: string, description: string) => void;
+}
+
+export default function PhilosophySection({ onBlockClick }: PhilosophySectionProps) {
   return (
     <section
       id="philosophy-section"
@@ -62,6 +66,7 @@ export default function PhilosophySection() {
           >
             {/* Interactive Block 1 */}
             <motion.div 
+              onClick={() => onBlockClick?.("Choose your space", "Every meaningful breakthrough begins at the intersection of disciplined strategy and remarkable creative vision.")}
               className="pb-8 w-full flex flex-col items-center lg:items-start group cursor-pointer"
               whileHover="hover"
               variants={{
@@ -88,6 +93,7 @@ export default function PhilosophySection() {
 
             {/* Interactive Block 2 */}
             <motion.div 
+              onClick={() => onBlockClick?.("Shape the future", "We believe that the best work emerges when curiosity meets conviction.")}
               className="pt-8 w-full flex flex-col items-center lg:items-start group cursor-pointer"
               whileHover="hover"
               variants={{

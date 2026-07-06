@@ -23,11 +23,10 @@ const TwitterIcon = ({ size = 18 }: { size?: number }) => (
   </svg>
 );
 
-const GlobeIcon = ({ size = 18 }: { size?: number }) => (
+const GithubIcon = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <path d="M2 12h20" />
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
   </svg>
 );
 
@@ -57,10 +56,16 @@ function animateOpacity(
 }
 
 /* ─── Hero Section ───────────────────────────────────────────── */
-function HeroSection() {
+interface HeroSectionProps {
+  onLoginClick: () => void;
+  onSubscribeSuccess: (email: string) => void;
+}
+
+function HeroSection({ onLoginClick, onSubscribeSuccess }: HeroSectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const fadingOut = useRef(false);
   const [inputFocused, setInputFocused] = useState(false);
+  const [email, setEmail] = useState('');
 
   // Mouse parallax state
   const mouseX = useMotionValue(0);
@@ -134,7 +139,12 @@ function HeroSection() {
     };
   }, [handleCanPlay, handleTimeUpdate, handleEnded]);
 
-  const navLinks = ['Features', 'Location', 'Schedule', 'Availability'];
+  const navLinks = [
+    { label: 'About', href: '#about-section' },
+    { label: 'Story', href: '#philosophy-section' },
+    { label: 'Services', href: '#services-section' },
+    { label: 'Discover', href: '#featured-video-section' }
+  ];
 
   return (
     <section
@@ -198,8 +208,8 @@ function HeroSection() {
           <div className="hidden md:flex items-center justify-center gap-6 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
+                key={link.label}
+                href={link.href}
                 className="px-4 py-2 text-[13px] font-medium rounded-full transition-colors duration-200"
                 style={{ color: 'var(--text-secondary)' }}
                 onMouseEnter={(e) => {
@@ -211,14 +221,14 @@ function HeroSection() {
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
-                {link}
+                {link.label}
               </a>
             ))}
           </div>
 
           {/* Right: Login */}
           <div className="flex justify-end">
-            <button className="btn-ghost text-[13px]">Login</button>
+            <button onClick={onLoginClick} className="btn-ghost text-[13px]">Login</button>
           </div>
         </div>
       </nav>
@@ -270,7 +280,13 @@ function HeroSection() {
             </p>
 
             {/* Email subscribe */}
-            <div
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!email.trim()) return;
+                onSubscribeSuccess(email);
+                setEmail('');
+              }}
               className="glass-card rounded-full pl-5 pr-1.5 py-1.5 flex flex-nowrap items-center gap-2 sm:gap-3 transition-all duration-200 w-full max-w-[95%] sm:max-w-md mx-auto"
               style={{
                 borderColor: inputFocused
@@ -283,6 +299,9 @@ function HeroSection() {
             >
               <input
                 type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 onFocus={() => setInputFocused(true)}
                 onBlur={() => setInputFocused(false)}
@@ -293,13 +312,14 @@ function HeroSection() {
                 }}
               />
               <button
+                type="submit"
                 id="hero-subscribe-btn"
                 className="btn-amber flex items-center gap-1.5 shrink-0 !py-2.5 !px-5"
               >
                 <span className="text-[13px]">Subscribe</span>
                 <ArrowRight size={15} />
               </button>
-            </div>
+            </form>
 
             {/* Meta text centered below */}
             <p
@@ -327,8 +347,8 @@ function HeroSection() {
           <div className="hidden md:flex items-center justify-center gap-6 md:absolute md:left-1/2 md:-translate-x-1/2">
             {navLinks.map((link) => (
               <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
+                key={link.label}
+                href={link.href}
                 className="text-xs font-medium transition-colors duration-200"
                 style={{ color: 'var(--text-muted)' }}
                 onMouseEnter={(e) => {
@@ -338,17 +358,24 @@ function HeroSection() {
                   e.currentTarget.style.color = 'var(--text-muted)';
                 }}
               >
-                {link}
+                {link.label}
               </a>
             ))}
           </div>
 
           {/* Right: Social icons */}
           <div className="flex items-center justify-center md:justify-end gap-3 w-full md:w-auto">
-            {[InstagramIcon, TwitterIcon, GlobeIcon].map((Icon, i) => (
-              <button
-                key={i}
-                className="p-2 rounded-full transition-colors duration-200"
+            {[
+              { Icon: InstagramIcon, href: 'https://www.instagram.com/haswaltch_/', label: 'Instagram' },
+              { Icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
+              { Icon: GithubIcon, href: 'https://github.com/WijayaKusumaa', label: 'GitHub' }
+            ].map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full transition-colors duration-200 flex items-center justify-center"
                 style={{ color: 'var(--text-muted)' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = 'var(--amber)';
@@ -358,9 +385,10 @@ function HeroSection() {
                   e.currentTarget.style.color = 'var(--text-muted)';
                   e.currentTarget.style.background = 'transparent';
                 }}
+                title={label}
               >
-                <Icon />
-              </button>
+                <Icon size={18} />
+              </a>
             ))}
           </div>
         </div>
@@ -371,6 +399,7 @@ function HeroSection() {
 
 import Lenis from 'lenis';
 import SparkleCursor from './components/SparkleCursor';
+import LoginModal from './components/LoginModal';
 
 export default function App() {
   const [toast, setToast] = useState<{ visible: boolean; message: string; subMessage: string }>({
@@ -378,19 +407,20 @@ export default function App() {
     message: '',
     subMessage: ''
   });
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const toastTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const showPopup = useCallback(() => {
+  const showToast = useCallback((message: string, subMessage: string = '') => {
     setToast({
       visible: true,
-      message: 'Developer malas membuat fitur yang lain 😴',
-      subMessage: 'Ini hanya web statis.'
+      message,
+      subMessage
     });
     
     if (toastTimeout.current) clearTimeout(toastTimeout.current);
     toastTimeout.current = setTimeout(() => {
       setToast(prev => ({ ...prev, visible: false }));
-    }, 3000);
+    }, 4000);
   }, []);
 
   useEffect(() => {
@@ -401,18 +431,39 @@ export default function App() {
       if (clickable) {
         const isLink = clickable.tagName === 'A';
         const href = clickable.getAttribute('href');
-        const isInternalScroll = isLink && href?.startsWith('#') && href !== '#';
         
-        if (!isInternalScroll) {
-          e.preventDefault();
-          showPopup();
+        if (isLink && href) {
+          // If it's a smooth scroll anchor link
+          if (href.startsWith('#') && href !== '#') {
+            e.preventDefault();
+            const element = document.querySelector(href);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          } 
+          // If it's an empty anchor link
+          else if (href === '#') {
+            e.preventDefault();
+            showToast('Feature Coming Soon 🚀', 'Halaman ini sedang dikembangkan.');
+          }
+          // Otherwise, allow standard external navigation (Instagram, GitHub, mailto, etc.)
+        } else if (clickable.tagName === 'BUTTON') {
+          // Check if button click is handled locally, if not, show coming soon toast
+          // Form submit buttons or specific clickable elements should not trigger toast
+          const typeAttr = clickable.getAttribute('type');
+          const hasCustomHandler = clickable.onclick || clickable.classList.contains('btn-amber') || clickable.classList.contains('btn-ghost') || clickable.closest('form');
+          
+          if (!hasCustomHandler && typeAttr !== 'submit') {
+            e.preventDefault();
+            showToast('Action Acknowledged ⚡', 'Interaksi berhasil dicatat.');
+          }
         }
       }
     };
 
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-  }, [showPopup]);
+  }, [showToast]);
 
   useEffect(() => {
     // Initialize Lenis for buttery smooth scrolling
@@ -441,28 +492,46 @@ export default function App() {
   return (
     <main className="w-full overflow-x-hidden flex flex-col">
       <SparkleCursor />
-      <HeroSection />
+      <HeroSection 
+        onLoginClick={() => setIsLoginOpen(true)} 
+        onSubscribeSuccess={(email) => showToast("Subscription Successful! 🚀", `Welcome to AskMe newsletter: ${email}`)} 
+      />
       <AboutSection />
       <FeaturedVideoSection />
-      <PhilosophySection />
-      <ServicesSection />
+      <PhilosophySection 
+        onBlockClick={(title, desc) => showToast(title, desc)} 
+      />
+      <ServicesSection 
+        onServiceClick={(title, desc) => showToast(title, desc)} 
+      />
       <Footer />
 
-      {/* Lazy Developer Toast */}
+      {/* Premium Glassmorphic Toast */}
       <AnimatePresence>
         {toast.visible && (
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-1 px-6 py-4 rounded-2xl border border-white/10 shadow-2xl"
-            style={{ background: 'rgba(11, 16, 38, 0.85)', backdropFilter: 'blur(12px)' }}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-1 px-6 py-4 rounded-2xl border border-white/10 shadow-2xl text-center min-w-[280px] max-w-[90%]"
+            style={{ 
+              background: 'linear-gradient(135deg, rgba(11, 16, 38, 0.9) 0%, rgba(6, 10, 26, 0.95) 100%)', 
+              backdropFilter: 'blur(16px)' 
+            }}
           >
-            <p className="text-sm md:text-base font-medium text-white">{toast.message}</p>
-            <p className="text-xs text-[var(--amber)] font-medium">{toast.subMessage}</p>
+            <p className="text-sm md:text-base font-semibold text-white tracking-tight">{toast.message}</p>
+            {toast.subMessage && (
+              <p className="text-xs text-[var(--amber)] font-medium mt-0.5">{toast.subMessage}</p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
+
+      <LoginModal 
+        isOpen={isLoginOpen} 
+        onClose={() => setIsLoginOpen(false)} 
+        onSuccess={(email) => showToast("Login Successful! 🔓", `Welcome back, ${email}`)} 
+      />
     </main>
   );
 }
