@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ─── Design Tokens ──────────────────────────────────────────── */
+:root {
+  --navy-deepest: #060a1a;
+  --navy-deep: #0B1026;
+  --navy-mid: #111838;
+  --navy-surface: #161e42;
+  --navy-elevated: #1c2650;
+  --amber: #E8772E;
+  --amber-light: #F4A62A;
+  --amber-glow: rgba(232, 119, 46, 0.15);
+  --text-primary: #e8eaf0;
+  --text-secondary: rgba(232, 234, 240, 0.55);
+  --text-muted: rgba(232, 234, 240, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--navy-deepest);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Glass Card ─────────────────────────────────────────────── */
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .glass-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  /* Subtle top-edge shine */
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+}
+
+/* ─── Utility: Amber Button ──────────────────────────────────── */
+@layer components {
+  .btn-amber {
+    background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.65rem 1.75rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-amber:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(232, 119, 46, 0.35);
+  }
+
+  .btn-amber:active {
+    transform: translateY(0);
+  }
+}
+
+/* ─── Utility: Ghost Button ──────────────────────────────────── */
+@layer components {
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-primary);
+    font-weight: 500;
+    border: 1px solid var(--border-subtle);
+    border-radius: 9999px;
+    padding: 0.55rem 1.5rem;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--border-hover);
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy-deepest);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--navy-elevated);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(232, 119, 46, 0.3);
+  color: #fff;
+}
