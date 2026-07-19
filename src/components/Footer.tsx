@@ -68,11 +68,11 @@ export default function Footer() {
 
       <div className="relative z-10 w-full px-6 sm:px-8 md:px-8 lg:px-12 mx-auto">
         {/* Main 4-Column Grid proportionally balanced */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-12 lg:gap-8 pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-y-16 gap-x-8 md:gap-12 lg:gap-8 pb-16">
           
           {/* Column 1: Brand & Bio (4/12 width) */}
-          <div className="sm:col-span-2 md:col-span-4 flex flex-col gap-6">
-            <div className="flex items-center gap-3">
+          <div className="sm:col-span-2 md:col-span-4 flex flex-col items-center md:items-start text-center md:text-left gap-7">
+            <div className="flex items-center justify-center md:justify-start gap-3">
               {/* Stylized Logo Icon */}
               <motion.div 
                 className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg text-white"
@@ -94,7 +94,7 @@ export default function Footer() {
             </p>
 
             {/* Social Media Buttons (Filled Circle reference style) */}
-            <div className="flex items-center gap-2.5 mt-2">
+            <div className="flex items-center gap-3 mt-4">
               {[
                 { Icon: GithubIcon, href: 'https://github.com/WijayaKusumaa', label: 'GitHub' },
                 { Icon: LinkedinIcon, href: 'https://linkedin.com/in/wijayadev', label: 'LinkedIn' },
@@ -117,12 +117,12 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Explore (2/12 width) */}
-          <div className="sm:col-span-1 md:col-span-2 flex flex-col gap-5 lg:pl-6">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center gap-1.5">
+          <div className="sm:col-span-1 md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left gap-6 lg:pl-6">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center justify-center md:justify-start gap-1.5">
               <span className="w-1 h-1 bg-[var(--amber)] rounded-full"></span>
               Explore
             </h4>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-4">
               {exploreLinks.map((link) => (
                 <li key={link.label}>
                   <a
@@ -137,12 +137,12 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Capabilities (3/12 width) */}
-          <div className="sm:col-span-1 md:col-span-3 flex flex-col gap-5">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center gap-1.5">
+          <div className="sm:col-span-1 md:col-span-3 flex flex-col items-center md:items-start text-center md:text-left gap-6">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center justify-center md:justify-start gap-1.5">
               <span className="w-1 h-1 bg-[var(--amber)] rounded-full"></span>
               Capabilities
             </h4>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-4">
               {servicesLinks.map((link) => (
                 <li key={link.label}>
                   <a
@@ -157,12 +157,12 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Contact & System Status (3/12 width) */}
-          <div className="sm:col-span-2 md:col-span-3 flex flex-col gap-5">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center gap-1.5">
+          <div className="sm:col-span-2 md:col-span-3 flex flex-col items-center md:items-start text-center md:text-left gap-6">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center justify-center md:justify-start gap-1.5">
               <span className="w-1 h-1 bg-[var(--amber)] rounded-full"></span>
               Get in Touch
             </h4>
-            <div className="flex flex-col gap-3.5">
+            <div className="flex flex-col gap-4.5">
               <a 
                 href="mailto:hello@wijaya.dev" 
                 className="text-sm text-[var(--text-secondary)] hover:text-white transition-colors duration-200 flex items-center gap-2"
@@ -186,7 +186,7 @@ export default function Footer() {
             </div>
 
             {/* Pulsing Systems Operational status bar (Reference layout check) */}
-            <div className="mt-5 flex items-center gap-2 bg-white/[0.02] border border-white/5 rounded-full px-4 py-2 w-fit">
+            <div className="mt-8 flex items-center gap-2 bg-white/[0.02] border border-white/5 rounded-full px-4 py-2 w-fit">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -200,10 +200,10 @@ export default function Footer() {
         </div>
 
         {/* Separator line before bottom bar */}
-        <div className="w-full h-px bg-white/5 my-8" />
+        <div className="w-full h-px bg-white/5 mt-16 mb-10" />
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-xs text-[var(--text-muted)]">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6 text-xs text-[var(--text-muted)] text-center md:text-left">
           <div>
             © {new Date().getFullYear()} AskMe. Built by{' '}
             <a 
@@ -218,7 +218,7 @@ export default function Footer() {
           </div>
           
           {/* Policy Links */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2.5">
             <a href="#" className="hover:text-[var(--text-primary)] transition-colors duration-200">Privacy Policy</a>
             <a href="#" className="hover:text-[var(--text-primary)] transition-colors duration-200">Terms of Service</a>
             <a href="#" className="hover:text-[var(--text-primary)] transition-colors duration-200">Cookie Policy</a>
