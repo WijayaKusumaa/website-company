@@ -52,8 +52,8 @@ export default function Footer() {
       style={{
         background: 'linear-gradient(180deg, var(--navy-deepest) 0%, var(--navy-deep) 100%)',
         borderTop: '1px solid var(--border-subtle)',
-        paddingTop: 'clamp(6rem, 10vw, 9rem)', // Plentiful breathing room at the top
-        paddingBottom: 'clamp(3rem, 6vw, 5rem)'
+        paddingTop: 'clamp(4rem, 8vw, 8rem)', // Balanced breathing room at the top
+        paddingBottom: 'clamp(2.5rem, 5vw, 5rem)'
       }}
     >
       {/* Background glow effects to enhance visual layers */}
@@ -66,12 +66,12 @@ export default function Footer() {
         style={{ background: 'var(--amber-glow)' }}
       />
 
-      <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 mx-auto">
+      <div className="relative z-10 w-full px-6 sm:px-8 md:px-8 lg:px-12 mx-auto">
         {/* Main 4-Column Grid proportionally balanced */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-12 lg:gap-8 pb-16">
           
           {/* Column 1: Brand & Bio (4/12 width) */}
-          <div className="md:col-span-4 flex flex-col gap-6">
+          <div className="sm:col-span-2 md:col-span-4 flex flex-col gap-6">
             <div className="flex items-center gap-3">
               {/* Stylized Logo Icon */}
               <motion.div 
@@ -117,7 +117,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Explore (2/12 width) */}
-          <div className="md:col-span-2 flex flex-col gap-5 lg:pl-6">
+          <div className="sm:col-span-1 md:col-span-2 flex flex-col gap-5 lg:pl-6">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center gap-1.5">
               <span className="w-1 h-1 bg-[var(--amber)] rounded-full"></span>
               Explore
@@ -137,7 +137,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Capabilities (3/12 width) */}
-          <div className="md:col-span-3 flex flex-col gap-5">
+          <div className="sm:col-span-1 md:col-span-3 flex flex-col gap-5">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center gap-1.5">
               <span className="w-1 h-1 bg-[var(--amber)] rounded-full"></span>
               Capabilities
@@ -157,7 +157,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Contact & System Status (3/12 width) */}
-          <div className="md:col-span-3 flex flex-col gap-5">
+          <div className="sm:col-span-2 md:col-span-3 flex flex-col gap-5">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-primary)] flex items-center gap-1.5">
               <span className="w-1 h-1 bg-[var(--amber)] rounded-full"></span>
               Get in Touch
@@ -203,7 +203,7 @@ export default function Footer() {
         <div className="w-full h-px bg-white/5 my-8" />
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[var(--text-muted)]">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-xs text-[var(--text-muted)]">
           <div>
             © {new Date().getFullYear()} AskMe. Built by{' '}
             <a 
@@ -218,7 +218,7 @@ export default function Footer() {
           </div>
           
           {/* Policy Links */}
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5">
             <a href="#" className="hover:text-[var(--text-primary)] transition-colors duration-200">Privacy Policy</a>
             <a href="#" className="hover:text-[var(--text-primary)] transition-colors duration-200">Terms of Service</a>
             <a href="#" className="hover:text-[var(--text-primary)] transition-colors duration-200">Cookie Policy</a>
