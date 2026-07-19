@@ -191,8 +191,8 @@ function HeroSection({ onLoginClick, onSubscribeSuccess }: HeroSectionProps) {
       </motion.div>
 
       {/* ── Navbar ─────────────────────────────────────────────── */}
-      <nav className="relative z-20 py-6 w-full flex-none">
-        <div className="w-full px-4 md:px-8 lg:px-12 flex justify-between items-center relative">
+      <nav className="relative z-20 pt-8 pb-4 sm:py-6 w-full flex-none">
+        <div className="w-full px-6 sm:px-8 md:px-8 lg:px-12 flex justify-between items-center relative">
           {/* Brand */}
           <div className="flex items-center gap-2.5 justify-start">
             <MapPin size={18} style={{ color: 'var(--amber)' }} />
@@ -245,13 +245,13 @@ function HeroSection({ onLoginClick, onSubscribeSuccess }: HeroSectionProps) {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <span
-              className="block text-center text-4xl sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.9] tracking-tight"
+              className="block text-center text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.9] tracking-tight"
               style={{ color: 'var(--text-primary)' }}
             >
               Know it
             </span>
             <span
-              className="block text-center text-4xl sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.9] tracking-tight"
+              className="block text-center text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.9] tracking-tight"
               style={{ color: 'var(--text-primary)' }}
             >
               then{' '}
@@ -426,7 +426,7 @@ export default function App() {
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const clickable = target.closest('a, button');
+      const clickable = target.closest('a, button') as HTMLElement | null;
       
       if (clickable) {
         const isLink = clickable.tagName === 'A';
